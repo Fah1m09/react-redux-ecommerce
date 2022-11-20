@@ -1,0 +1,112 @@
+*, *:after, *:before {
+  box-sizing: border-box;
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+body {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+}
+
+html {
+  //font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+  font-family: Segoe UI, SegoeUI !important;
+}
+
+.container{
+  height: 90vh;
+}
+
+.app-root {
+  display: flex;
+}
+
+.footerCopyright{
+  text-align: center;
+  padding: 0px;
+}
+
+//0.875rem
+//font size start
+.MuiInputBase-root {
+  font-size: 0.875rem !important;
+}
+
+.MuiFormLabel-root {
+  font-size: 0.875rem !important;
+}
+
+.MuiTypography-body1 {
+  font-size: 0.875rem !important;
+}
+
+.MuiFormControlLabel-root {
+  margin-bottom: 0 !important;
+}
+
+.MuiMenuItem-root {
+  font-size: 0.875rem !important;
+}
+
+label + .MuiInput-formControl {
+  margin-top: 13px !important;
+}
+
+//outlined textbox
+.MuiOutlinedInput-notchedOutline {
+  border-color: #dedcdb !important;
+  border-top-color: rgb(222, 220, 219);
+  border-right-color: rgb(222, 220, 219);
+  border-bottom-color: rgb(222, 220, 219);
+  border-left-color: rgb(222, 220, 219);
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #3f51bf !important;
+  border-top-color: rgb(63, 81, 181);
+  border-right-color: rgb(63, 81, 181);
+  border-bottom-color: rgb(63, 81, 181);
+  border-left-color: rgb(63, 81, 181);
+}
+
+html {
+  overflow-y: scroll;
+}
+
+//bootstrap
+.use-bootstrap {
+  @import "bootstrap/scss/functions";
+  @import "bootstrap/scss/variables";
+  @import "bootstrap/scss/mixins";
+  @import "bootstrap/scss/utilities";
+
+  // Helpers
+  @import "bootstrap/scss/helpers";
+
+  // Utilities
+  @import "bootstrap/scss/utilities/api";
+
+  .bg-light {
+    background-color: white !important;
+  }
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(49, 49, 49);
+  padding: 0.5rem;
+  color: white;
+  text-align: center;
+}
