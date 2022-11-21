@@ -18,16 +18,15 @@ export const ProductListView = () => {
     dispatch(getProduct());
   }, []);
   return (
-    <div>
-      <h2>List of Product</h2>
+    <>
       {products.product.length ? (
-        <Grid container>
+        <Grid container spacing={2}>
           {products.product.map((x) => (
             <Grid item xs={4}>
-              <Card sx={{ maxWidth: 345 }}>
+              <Card>
                 <CardMedia
                   component="img"
-                  height="140"
+                  height="300"
                   image={x.thumbnail}
                   alt="green iguana"
                 />
@@ -48,6 +47,6 @@ export const ProductListView = () => {
           ))}
         </Grid>
       ) : null}
-    </div>
+    </>
   );
 };
