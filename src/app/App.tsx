@@ -1,6 +1,6 @@
 import * as React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { purple } from '@mui/material/colors';
+import { purple } from "@mui/material/colors";
 import { menus } from "../utils/constants/menuRoutes.constants";
 import "./../assets/scss/App.scss";
 import MissingRoute from "./components/MissingRoute";
@@ -12,6 +12,7 @@ import HomePage from "./pagaes/home";
 import { createTheme, Paper, ThemeProvider } from "@mui/material";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import Details from "./pagaes/details";
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
@@ -35,9 +36,9 @@ const App = () => {
             main: purple[500],
           },
           secondary: {
-            main: '#f44336',
+            main: "#f44336",
           },
-          mode
+          mode,
         },
       }),
     [mode]
@@ -60,7 +61,8 @@ const App = () => {
                   <Routes>
                     {/* map routes from menu constants */}
                     {/* <Route path="/" element={<Navigate to={menus[0].path} />} /> */}
-                    <Route path="/"  element={<HomePage/>} />
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/products/:productId" element={<Details />} />
                     <Route path="*" element={<MissingRoute />} />
                   </Routes>
                 </div>

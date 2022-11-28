@@ -1,32 +1,27 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { iProduct } from "../../../types/ProductList";
+import { iProductList } from "../../../types/ProductList";
 import { sessionStore } from "../../../utils/helpers/session";
+import { getProductList } from "../../../services/dummyJson.service";
 
 type InitialState = {
-  product: iProduct[];
+  productList: iProductList[];
 };
 
 const initialState: InitialState = {
-  product: [],
+  productList: [],
 };
-
-export const getProduct = createAsyncThunk("user/fetchUsers", () => {
-  return axios
-    .get("https://dummyjson.com/products")
-    .then((response) => response.data.products);
-});
 
 const GetProductListSlice = createSlice({
   name: "getProductListReducer",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getProduct.pending, (state) => {});
-    builder.addCase(getProduct.fulfilled, (state, { payload }) => {
-      state.product = payload;
+    builder.addCase(getProductList.pending, (state) => {});
+    builder.addCase(getProductList.fulfilled, (state, { payload }) => {
+      state.productList = payload;
     });
-    builder.addCase(getProduct.rejected, (state, { payload }) => {});
+    builder.addCase(getProductList.rejected, (state, { payload }) => {});
   },
 });
 

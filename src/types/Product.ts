@@ -1,4 +1,4 @@
-export type iProductList = {
+export type iProduct = {
   id: string;
   title: string;
   description: string;
@@ -9,4 +9,5 @@ export type iProductList = {
   brand: string;
   category: string;
   thumbnail: string;
+  images: string;
 };
