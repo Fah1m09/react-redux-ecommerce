@@ -9,5 +9,5 @@ export type iProduct = {
   brand: string;
   category: string;
   thumbnail: string;
-  images: string;
+  images: string[];
 };
