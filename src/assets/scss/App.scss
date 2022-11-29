@@ -1,4 +1,6 @@
-*, *:after, *:before {
+*,
+*:after,
+*:before {
   box-sizing: border-box;
   font: inherit;
   color: inherit;
@@ -7,22 +9,33 @@
   border: none;
   outline: none;
 }
-
+h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+}
+h3 {
+  font-size: 2.3rem;
+  font-weight: 600;
+}
+h5 {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+p,
+a {
+  font-size: 1rem;
+}
 body {
   margin: 0;
-  font-size: 1rem;
-  font-weight: 400;
   line-height: 1.5;
-  color: #212529;
-  background-color: #fff;
 }
 
 html {
   //font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
-  font-family: Segoe UI, SegoeUI !important;
+  font-family: Poppins !important;
 }
 
-.container{
+.container {
   height: 90vh;
 }
 
@@ -30,7 +43,7 @@ html {
   display: flex;
 }
 
-.footerCopyright{
+.footerCopyright {
   text-align: center;
   padding: 0px;
 }
@@ -100,6 +113,14 @@ html {
   }
 }
 
+.product-card {
+  text-decoration: none;
+}
+
+.product-title {
+  text-decoration: none;
+}
+
 .footer {
   position: fixed;
   left: 0;
@@ -110,3 +131,5 @@ html {
   color: white;
   text-align: center;
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");

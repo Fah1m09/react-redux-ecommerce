@@ -25,16 +25,21 @@ export const ProductListView = () => {
       <Grid container spacing={2}>
         {productsList.map((x) => (
           <Grid item xs={4} key={x.id}>
-            <Card>
+            <Card className="product-card">
               <Link className="equipment-title" to={`/products/${x.id}`}>
                 <CardMedia
                   component="img"
                   height="300"
                   image={x.thumbnail}
-                  alt="green iguana"
+                  alt="thumbnail"
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                  <Typography
+                    className="product-title"
+                    gutterBottom
+                    variant="h5"
+                    component="div"
+                  >
                     {x.title}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
@@ -42,7 +47,7 @@ export const ProductListView = () => {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small">Share</Button>
+                  <Button size="small">{x.price}</Button>
                   <Button size="small">Learn More</Button>
                 </CardActions>
               </Link>
