@@ -8,6 +8,7 @@
   padding: 0;
   border: none;
   outline: none;
+  --blue: #2196f3;
 }
 h1 {
   font-size: 2.8rem;
@@ -36,6 +37,9 @@ html {
 }
 
 .container {
+  width: 90%;
+  margin: auto;
+  padding-top: 1rem;
   height: 90vh;
 }
 
@@ -117,8 +121,17 @@ html {
   text-decoration: none;
 }
 
-.product-title {
+.equipment-title {
   text-decoration: none;
+}
+
+.product-discount-percentage {
+  padding-left: 1rem;
+  color: green;
+}
+
+.product-title {
+  color: var(--blue);
 }
 
 .footer {

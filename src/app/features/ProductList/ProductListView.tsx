@@ -5,6 +5,7 @@ import {
   CardContent,
   CardMedia,
   Grid,
+  Rating,
   Typography,
 } from "@mui/material";
 import { useEffect } from "react";
@@ -45,9 +46,21 @@ export const ProductListView = () => {
                   <Typography variant="body2" color="text.secondary">
                     {x.description}
                   </Typography>
+                  <Rating
+                    name="read-only"
+                    value={parseInt(x.rating)}
+                    precision={0.5}
+                    readOnly
+                    size="small"
+                  />
                 </CardContent>
                 <CardActions>
-                  <Button size="small">{x.price}</Button>
+                  <Button size="small" variant="contained" color="primary">
+                    {x.price}$
+                  </Button>
+                  <p className="product-discount-percentage">
+                    {x.discountPercentage}%
+                  </p>
                   <Button size="small">Learn More</Button>
                 </CardActions>
               </Link>

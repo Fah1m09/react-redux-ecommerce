@@ -20,8 +20,7 @@ const pages = ["Features", "About Us", "Contact"];
 const settings = ["Profile", "Logout"];
 
 const Header = (props) => {
-
-  const {theme, colorMode} = props;
+  const { theme, colorMode } = props;
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -48,7 +47,6 @@ const Header = (props) => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <AdbIcon sx={{ display: { xs: "none", md: "flex" } }} />
         <Typography
           variant="h6"
           noWrap
@@ -64,7 +62,7 @@ const Header = (props) => {
             textDecoration: "none",
           }}
         >
-          LOGO
+          GG Shoping
         </Typography>
 
         <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -103,7 +101,7 @@ const Header = (props) => {
             ))}
           </Menu>
         </Box>
-        <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+
         <Typography
           variant="h5"
           noWrap
@@ -120,7 +118,7 @@ const Header = (props) => {
             textDecoration: "none",
           }}
         >
-          LOGO
+          GG Shoping
         </Typography>
         <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
           {pages.map((page) => (
