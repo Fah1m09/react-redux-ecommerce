@@ -15,6 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import AddShoppingCartTwoToneIcon from "@mui/icons-material/AddShoppingCartTwoTone";
 
 const pages = ["Features", "About Us", "Contact"];
 const settings = ["Profile", "Logout"];
@@ -143,6 +144,9 @@ const Header = (props) => {
             ) : (
               <Brightness4Icon />
             )}
+          </IconButton>
+          <IconButton>
+            <AddShoppingCartTwoToneIcon />
           </IconButton>
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

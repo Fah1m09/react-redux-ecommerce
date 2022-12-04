@@ -117,12 +117,25 @@ html {
   }
 }
 
+.flex {
+  display: flex;
+}
+
+.details-image-list {
+  overflow: hidden;
+}
+
 .product-card {
   text-decoration: none;
 }
 
 .equipment-title {
   text-decoration: none;
+}
+
+.product-image-display {
+  display: flex;
+  overflow: hidden;
 }
 
 .product-discount-percentage {

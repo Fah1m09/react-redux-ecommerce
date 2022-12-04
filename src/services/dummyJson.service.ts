@@ -32,3 +32,40 @@ export const getProductDetails = createAsyncThunk<
   const res = await callAPI<iProduct>(url, null, "GET", thunkApi);
   return res;
 });
+
+export const getAuth = createAsyncThunk<
+  iProductList[],
+  null,
+  {
+    rejectValue: string;
+  }
+>("getProductListReducer/getProductList", async (data, thunkApi) => {
+  const API_URL = configs.API_BASE_URL;
+  const url = `https://dummyjson.com/auth`;
+  const res = await callAPI<iProductList[]>(url, null, "GET", thunkApi);
+  return res.products;
+});
+export const getCategories = createAsyncThunk<
+  iProductList[],
+  null,
+  {
+    rejectValue: string;
+  }
+>("getProductListReducer/getProductList", async (data, thunkApi) => {
+  const API_URL = configs.API_BASE_URL;
+  const url = `https://dummyjson.com/products/categories`;
+  const res = await callAPI<iProductList[]>(url, null, "GET", thunkApi);
+  return res.products;
+});
+export const searchProductList = createAsyncThunk<
+  iProductList[],
+  null,
+  {
+    rejectValue: string;
+  }
+>("getProductListReducer/getProductList", async (data, thunkApi) => {
+  const API_URL = configs.API_BASE_URL;
+  const url = `https://dummyjson.com/search?q=`;
+  const res = await callAPI<iProductList[]>(url, null, "GET", thunkApi);
+  return res.products;
+});
