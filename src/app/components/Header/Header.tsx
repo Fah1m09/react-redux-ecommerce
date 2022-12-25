@@ -16,19 +16,24 @@ import AdbIcon from "@mui/icons-material/Adb";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import AddShoppingCartTwoToneIcon from "@mui/icons-material/AddShoppingCartTwoTone";
+import Cart from "../Cart/Cart";
 
 const pages = ["Features", "About Us", "Contact"];
 const settings = ["Profile", "Logout"];
 
 const Header = (props) => {
   const { theme, colorMode } = props;
-
+  const [openCart, setOpenCart] = React.useState(false);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+
+  const handleClickOpenCart = () => {
+    setOpenCart(!openCart);
+  };
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -145,7 +150,7 @@ const Header = (props) => {
               <Brightness4Icon />
             )}
           </IconButton>
-          <IconButton>
+          <IconButton onClick={handleClickOpenCart}>
             <AddShoppingCartTwoToneIcon />
           </IconButton>
           <Tooltip title="Open settings">
@@ -177,6 +182,7 @@ const Header = (props) => {
           </Menu>
         </Box>
       </Toolbar>
+      <Cart openCart={openCart} setOpenCart={setOpenCart} />;
     </AppBar>
   );
 };

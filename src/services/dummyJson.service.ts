@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { RootState } from "../app/store";
 import { useAppSelector } from "../hooks/useReduxHooks";
 import { callAPI } from "./api.service";
 import { configs } from "../../src/utils/constants/configs.constants";
@@ -39,33 +38,35 @@ export const getAuth = createAsyncThunk<
   {
     rejectValue: string;
   }
->("getProductListReducer/getProductList", async (data, thunkApi) => {
+>("getProductListReducer/getAuth", async (data, thunkApi) => {
   const API_URL = configs.API_BASE_URL;
   const url = `https://dummyjson.com/auth`;
   const res = await callAPI<iProductList[]>(url, null, "GET", thunkApi);
-  return res.products;
+  return res;
 });
+
 export const getCategories = createAsyncThunk<
-  iProductList[],
+  [],
   null,
   {
     rejectValue: string;
   }
->("getProductListReducer/getProductList", async (data, thunkApi) => {
+>("getProductListReducer/getCategories", async (data, thunkApi) => {
   const API_URL = configs.API_BASE_URL;
   const url = `https://dummyjson.com/products/categories`;
-  const res = await callAPI<iProductList[]>(url, null, "GET", thunkApi);
-  return res.products;
+  const res = await callAPI<[]>(url, null, "GET", thunkApi);
+  return res;
 });
+
 export const searchProductList = createAsyncThunk<
   iProductList[],
   null,
   {
     rejectValue: string;
   }
->("getProductListReducer/getProductList", async (data, thunkApi) => {
+>("getProductListReducer/searchProductList", async (data, thunkApi) => {
   const API_URL = configs.API_BASE_URL;
-  const url = `https://dummyjson.com/search?q=`;
+  const url = `https://dummyjson.com/search?q=${data}`;
   const res = await callAPI<iProductList[]>(url, null, "GET", thunkApi);
   return res.products;
 });

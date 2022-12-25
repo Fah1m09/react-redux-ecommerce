@@ -40,7 +40,6 @@ html {
   width: 80%;
   margin: auto;
   padding-top: 1rem;
-  height: 90vh;
 }
 
 .app-root {
@@ -49,7 +48,6 @@ html {
 
 .footerCopyright {
   text-align: center;
-  padding: 0px;
 }
 
 //0.875rem
@@ -97,24 +95,6 @@ label + .MuiInput-formControl {
 
 html {
   overflow-y: scroll;
-}
-
-//bootstrap
-.use-bootstrap {
-  @import "bootstrap/scss/functions";
-  @import "bootstrap/scss/variables";
-  @import "bootstrap/scss/mixins";
-  @import "bootstrap/scss/utilities";
-
-  // Helpers
-  @import "bootstrap/scss/helpers";
-
-  // Utilities
-  @import "bootstrap/scss/utilities/api";
-
-  .bg-light {
-    background-color: white !important;
-  }
 }
 
 .flex {
