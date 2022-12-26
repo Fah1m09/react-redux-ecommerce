@@ -20,7 +20,8 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { ThemeProvider } from "@mui/material/styles";
 import ArrowBackIosTwoToneIcon from "@mui/icons-material/ArrowBackIosTwoTone";
 import ArrowForwardIosTwoToneIcon from "@mui/icons-material/ArrowForwardIosTwoTone";
-import { trTR } from "@mui/x-date-pickers";
+import { addToCart } from "../../components/Cart/CartSlice";
+import { iCart } from "../../../types/Cart";
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -60,7 +61,10 @@ export const ProductDetailsView = () => {
   const products = useAppSelector((state) => state.prod.product);
   const [tabValue, setTabValue] = useState(0);
   const [open, setOpen] = useState(false);
+  const [numberOfProd, setNumberOfProd] = useState(1);
   const [currImage, setCurrImage] = useState(0);
+  const carts = useAppSelector((state) => state.cart.cart);
+  const [temp, setTemp] = useState([]);
 
   const changeImage = () => {
     if (currImage < products.images.length - 1) {
@@ -80,6 +84,25 @@ export const ProductDetailsView = () => {
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
+  };
+
+  const handleQuantity = (e) => {
+    const minValue = 1;
+    const maxValue = Number(products.stock);
+    setNumberOfProd(Math.min(Math.max(e.target.value, minValue), maxValue));
+  };
+
+  const handleCart = () => {
+    const reqQs: iCart = {
+      productId: products.id,
+      title: products.title,
+      price: parseInt(products.price),
+      total: numberOfProd * parseFloat(products.price),
+      thumbnail: products.thumbnail,
+      quantity: numberOfProd,
+    };
+
+    dispatch(addToCart(reqQs));
   };
 
   // share
@@ -112,42 +135,42 @@ export const ProductDetailsView = () => {
               readOnly
             />
             <div>
-              <p>
-                <span>Categories: </span>
-                <Chip label={products.category} />
-              </p>
+              <span>Categories: </span>
+              <Chip label={products.category} />
             </div>
             <div>
-              <p>
-                <span>Brand: </span>
-                <Chip label={products.brand} variant="outlined" />
-              </p>
+              <span>Brand: </span>
+              <Chip label={products.brand} variant="outlined" />
             </div>
-            <p>Instock: ({products.stock})</p>
-
+            Instock: ({products.stock})
             <div className="flex">
               <h5>{products.price}$</h5>
               <h5 className="product-discount-percentage">
                 save ({products.discountPercentage})%
               </h5>
             </div>
-
             <TextField
-              sx={{ width: "60px", marginRight: "1rem" }}
+              sx={{ width: "80px", marginRight: "1rem" }}
+              inputProps={{ min: 1, max: parseInt(products.stock) }}
               type="number"
               size="small"
               id="outlined-basic"
               variant="outlined"
-              defaultValue={1}
+              onClick={(e) => handleQuantity(e)}
+              defaultValue={numberOfProd}
             />
-
-            <Button variant="contained" startIcon={<AddShoppingCartIcon />}>
+            <Button
+              onClick={handleCart}
+              variant="contained"
+              startIcon={<AddShoppingCartIcon />}
+            >
               Add to Cart
             </Button>
           </Grid>
           <Grid className="details-image-list" item xs={12} lg={4}>
-            {products.images.map((x) => (
+            {products.images.map((x, index) => (
               <img
+                key={index}
                 src={x}
                 alt="product-main-image"
                 onClick={handleClickOpen}
@@ -156,7 +179,7 @@ export const ProductDetailsView = () => {
               />
             ))}
           </Grid>
-          <Grid xs={12}>
+          <Grid item xs={12}>
             <Box sx={{ borderTop: "20px", borderColor: "divider" }}>
               <Tabs
                 value={tabValue}
@@ -168,10 +191,10 @@ export const ProductDetailsView = () => {
               </Tabs>
             </Box>
             <TabPanel value={tabValue} index={0}>
-              <p>{products.description}</p>
+              {products.description}
             </TabPanel>
             <TabPanel value={tabValue} index={1}>
-              <p>Review</p>
+              Review
             </TabPanel>
           </Grid>
 

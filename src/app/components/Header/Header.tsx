@@ -16,7 +16,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import AddShoppingCartTwoToneIcon from "@mui/icons-material/AddShoppingCartTwoTone";
-import Cart from "../Cart/Cart";
+import Cart from "../Cart/CartView";
 
 const pages = ["Features", "About Us", "Contact"];
 const settings = ["Profile", "Logout"];
@@ -182,7 +182,7 @@ const Header = (props) => {
           </Menu>
         </Box>
       </Toolbar>
-      <Cart openCart={openCart} setOpenCart={setOpenCart} />;
+      <Cart openCart={openCart} setOpenCart={setOpenCart} />
     </AppBar>
   );
 };

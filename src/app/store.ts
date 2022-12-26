@@ -3,6 +3,7 @@ import loaderReducer from "./features/Loader/loaderSlice";
 import authReducer from "./features/Auth/authSlice";
 import getProductListReducer from "./features/ProductList/ProductListSlice";
 import getProductDetailsReducer from "./features/ProductDetails/ProductDetailsSlice";
+import cartReducer from "./components/Cart/CartSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     auth: authReducer,
     prodList: getProductListReducer,
     prod: getProductDetailsReducer,
+    cart: cartReducer,
   },
 });
 

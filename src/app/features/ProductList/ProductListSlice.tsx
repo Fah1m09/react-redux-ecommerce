@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { iProductList } from "../../../types/ProductList";
-import { sessionStore } from "../../../utils/helpers/session";
+import { sessionGetData, sessionStore } from "../../../utils/helpers/session";
+
 import {
   getCategories,
   getProductList,
@@ -25,6 +26,7 @@ const GetProductListSlice = createSlice({
     builder.addCase(getProductList.pending, (state) => {});
     builder.addCase(getProductList.fulfilled, (state, { payload }) => {
       state.productList = payload;
+      sessionStore("ProductList", state.productList);
     });
     builder.addCase(getProductList.rejected, (state, { payload }) => {});
     builder.addCase(searchProductList.pending, (state) => {});
@@ -35,6 +37,7 @@ const GetProductListSlice = createSlice({
     builder.addCase(getCategories.pending, (state) => {});
     builder.addCase(getCategories.fulfilled, (state, { payload }) => {
       state.categories = payload;
+      sessionStore("Categories", state.categories);
     });
     builder.addCase(getCategories.rejected, (state, { payload }) => {});
   },

@@ -21,6 +21,7 @@ import {
   getProductList,
   searchProductList,
 } from "../../../services/dummyJson.service";
+import { sessionGetData } from "../../../utils/helpers/session";
 
 export const ProductListView = () => {
   const dispatch = useAppDispatch();
@@ -28,8 +29,12 @@ export const ProductListView = () => {
   const [searchText, setsearchText] = useState("");
 
   useEffect(() => {
-    dispatch(getProductList());
-    dispatch(getCategories());
+    if (sessionGetData("ProductList") == null) {
+      dispatch(getProductList());
+    }
+    if (sessionGetData("Categories") == null) {
+      dispatch(getCategories());
+    }
   }, []);
 
   const handleChange = (event) => {
@@ -44,8 +49,15 @@ export const ProductListView = () => {
     return productsList.filter((item) => item.category === currentCategory);
   }
 
-  const productsList = useAppSelector((state) => state.prodList.productList);
-  const categories = useAppSelector((state) => state.prodList.categories);
+  const productsList =
+    sessionGetData("ProductList") != null
+      ? sessionGetData("ProductList")
+      : useAppSelector((state) => state.prodList.productList);
+  const categories =
+    sessionGetData("Categories") != null
+      ? sessionGetData("Categories")
+      : useAppSelector((state) => state.prodList.categories);
+
   var filteredList = useMemo(getFilteredList, [currentCategory, productsList]);
 
   const handleSearch = () => {
@@ -90,49 +102,66 @@ export const ProductListView = () => {
                 fullWidth
               />
             </Grid>
-            {filteredList.map((x) => (
-              <Grid item xs={4} key={x.id}>
-                <Card className="product-card">
-                  <Link className="equipment-title" to={`/products/${x.id}`}>
-                    <CardMedia
-                      component="img"
-                      height="300"
-                      image={x.thumbnail}
-                      alt="thumbnail"
-                    />
-                    <CardContent>
-                      <Typography
-                        className="product-title"
-                        gutterBottom
-                        variant="h5"
-                        component="div"
-                      >
-                        {x.title}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {x.description}
-                      </Typography>
-                      <Rating
-                        name="read-only"
-                        value={parseInt(x.rating)}
-                        precision={0.5}
-                        readOnly
-                        size="small"
+            {filteredList.length > 0 ? (
+              filteredList.map((x) => (
+                <Grid item xs={4} key={x.id}>
+                  <Card className="product-card">
+                    <Link className="equipment-title" to={`/products/${x.id}`}>
+                      <CardMedia
+                        component="img"
+                        height="300"
+                        image={x.thumbnail}
+                        alt="thumbnail"
                       />
-                    </CardContent>
-                    <CardActions>
-                      <Button size="small" variant="contained" color="primary">
-                        {x.price}$
-                      </Button>
-                      <p className="product-discount-percentage">
-                        {x.discountPercentage}%
-                      </p>
-                      <Button size="small">Learn More</Button>
-                    </CardActions>
-                  </Link>
-                </Card>
-              </Grid>
-            ))}
+                      <CardContent>
+                        <Typography
+                          className="product-title"
+                          gutterBottom
+                          variant="h5"
+                          component="div"
+                        >
+                          {x.title}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {x.description}
+                        </Typography>
+                        <Rating
+                          name="read-only"
+                          value={parseInt(x.rating)}
+                          precision={0.5}
+                          readOnly
+                          size="small"
+                        />
+                      </CardContent>
+                      <CardActions>
+                        <Button
+                          size="small"
+                          variant="contained"
+                          color="primary"
+                        >
+                          {x.price}$
+                        </Button>
+                        <p className="product-discount-percentage">
+                          {x.discountPercentage}%
+                        </p>
+                        <Button size="small">Learn More</Button>
+                      </CardActions>
+                    </Link>
+                  </Card>
+                </Grid>
+              ))
+            ) : (
+              <div
+                style={{
+                  textAlign: "center",
+                  paddingLeft: "30%",
+                  paddingTop: "20%",
+                  minHeight: "80vh",
+                }}
+              >
+                <h3>Sorry No products available</h3>
+              </div>
+            )}
           </>
         )}
       </Grid>

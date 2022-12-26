@@ -22,6 +22,7 @@ function sessionGetData(key) {
     // If the item is expired, delete the item from storage
     // and return null
     localStorage.removeItem(key);
+    localStorage.clear();
     return null;
   }
 
