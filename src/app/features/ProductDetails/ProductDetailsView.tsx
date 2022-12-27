@@ -22,6 +22,8 @@ import ArrowBackIosTwoToneIcon from "@mui/icons-material/ArrowBackIosTwoTone";
 import ArrowForwardIosTwoToneIcon from "@mui/icons-material/ArrowForwardIosTwoTone";
 import { addToCart } from "../../components/Cart/CartSlice";
 import { iCart } from "../../../types/Cart";
+import { FacebookShareButton } from "react-share";
+import FacebookIcon from "react-share/lib/FacebookIcon";
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -92,6 +94,8 @@ export const ProductDetailsView = () => {
     setNumberOfProd(Math.min(Math.max(e.target.value, minValue), maxValue));
   };
 
+  const link = window.location.href;
+
   const handleCart = () => {
     const reqQs: iCart = {
       productId: products.id,
@@ -105,8 +109,6 @@ export const ProductDetailsView = () => {
     dispatch(addToCart(reqQs));
   };
 
-  // share
-  // button for buying multiple quantity
   // compare
   // popup image slider
 
@@ -149,6 +151,13 @@ export const ProductDetailsView = () => {
                 save ({products.discountPercentage})%
               </h5>
             </div>
+            <FacebookShareButton url={link}>
+              <FacebookIcon
+                lightingColor="white"
+                round
+                size={"30px"}
+              ></FacebookIcon>
+            </FacebookShareButton>
             <TextField
               sx={{ width: "80px", marginRight: "1rem" }}
               inputProps={{ min: 1, max: parseInt(products.stock) }}
@@ -167,6 +176,7 @@ export const ProductDetailsView = () => {
               Add to Cart
             </Button>
           </Grid>
+
           <Grid className="details-image-list" item xs={12} lg={4}>
             {products.images.map((x, index) => (
               <img

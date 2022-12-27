@@ -16,21 +16,43 @@ import AdbIcon from "@mui/icons-material/Adb";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import AddShoppingCartTwoToneIcon from "@mui/icons-material/AddShoppingCartTwoTone";
+//import { useNavigate } from "react-router-dom";
 import Cart from "../Cart/CartView";
+import { useAppSelector, useAppDispatch } from "../../../hooks/useReduxHooks";
+import { sessionGetData } from "../../../utils/helpers/session";
+import { getCategories } from "../../../services/dummyJson.service";
 
-const pages = ["Features", "About Us", "Contact"];
+const pages = ["Categories", "Features", "About Us", "Contact"];
 const settings = ["Profile", "Logout"];
 
 const Header = (props) => {
   const { theme, colorMode } = props;
+  const dispatch = useAppDispatch();
+  //const navigate = useNavigate();
   const [openCart, setOpenCart] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+  const open = Boolean(anchorEl);
+  if (sessionGetData("Categories") == null) {
+    dispatch(getCategories());
+  }
+  const categories =
+    sessionGetData("Categories") != null
+      ? sessionGetData("Categories")
+      : useAppSelector((state) => state.prodList.categories);
 
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    //navigate("/verification");
+    setAnchorEl(null);
+  };
   const handleClickOpenCart = () => {
     setOpenCart(!openCart);
   };
@@ -128,13 +150,29 @@ const Header = (props) => {
         </Typography>
         <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
           {pages.map((page) => (
-            <Button
-              key={page}
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              {page}
-            </Button>
+            <>
+              <Button
+                key={page}
+                onClick={page === "Categories" ? handleClick : null}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                {page}
+              </Button>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                {categories.map((cat) => (
+                  <MenuItem value={cat} key={cat} onClick={handleClose}>
+                    {cat}
+                  </MenuItem>
+                ))}
+              </Menu>
+            </>
           ))}
         </Box>
 
