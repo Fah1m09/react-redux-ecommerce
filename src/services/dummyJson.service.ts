@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { useAppSelector } from "../hooks/useReduxHooks";
-import { callAPI } from "./api.service";
 import { configs } from "../../src/utils/constants/configs.constants";
-import { iProductList } from "../types/ProductList";
+import { iAuthRequest } from "../types/AuthRequest";
+import { iAuthResponse } from "../types/AuthResponse";
 import { iProduct } from "../types/Product";
-import { sessionGetData } from "../utils/helpers/session";
+import { iProductList } from "../types/ProductList";
+import { callAPI } from "./api.service";
 
 export const getProductList = createAsyncThunk<
   iProductList[],
@@ -33,15 +33,15 @@ export const getProductDetails = createAsyncThunk<
 });
 
 export const getAuth = createAsyncThunk<
-  iProductList[],
-  null,
+  iAuthResponse,
+  iAuthRequest,
   {
     rejectValue: string;
   }
 >("getProductListReducer/getAuth", async (data, thunkApi) => {
   const API_URL = configs.API_BASE_URL;
-  const url = `https://dummyjson.com/auth`;
-  const res = await callAPI<iProductList[]>(url, null, "GET", thunkApi);
+  const url = `https://dummyjson.com/auth/login`;
+  const res = await callAPI<iAuthResponse>(url, data, "POST", thunkApi);
   return res;
 });
 
